@@ -37,6 +37,8 @@ export default defineConfig((/* ctx */) => {
         node: 'node20',
       },
 
+      distDir: 'build/',
+
       typescript: {
         strict: true,
         vueShim: true,
@@ -57,7 +59,6 @@ export default defineConfig((/* ctx */) => {
       // ignorePublicFolder: true,
       // minify: false,
       // polyfillModulePreload: true,
-      // distDir
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
