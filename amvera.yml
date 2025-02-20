@@ -1,0 +1,17 @@
+version: null
+meta:
+  environment: node
+  toolchain:
+    name: npm
+    version: "18"
+build:
+  skip: true
+  artifacts:
+    "*": /
+run:
+  scriptName: ""
+  scriptArguments: null
+  nodeArguments: null
+  command: npm install && npm run build
+  persistenceMount: /data
+  containerPort: 80
