@@ -13,23 +13,14 @@
     <q-card-actions align="between" class="q-pa-sm">
       <div class="text-h6 q-mt-sm">{{ formatPrice(product.price) }}</div>
 
-      <q-btn
-        color="accent"
-        icon="add"
-        :label="$q.screen.gt.xs ? 'Add to Cart' : undefined"
-        @click="$emit('add-to-cart', product)"
-        round
-      />
+      <q-btn color="accent" icon="add" @click="$emit('add-to-cart', product)" round />
     </q-card-actions>
   </q-card>
 </template>
 
 <script setup lang="ts">
-import { useQuasar } from 'quasar'
 import type { Product } from 'src/models/types'
 import { formatPrice } from 'src/utils/format'
-
-const $q = useQuasar()
 
 defineProps<{
   product: Product
