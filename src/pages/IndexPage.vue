@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-sm q-pt-md">
+  <q-page class="q-pa-md">
     <CategoryList
       :categories="categories"
       :selected-id="selectedCategory"
