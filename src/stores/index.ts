@@ -2,6 +2,7 @@ import { defineStore } from '#q-app/wrappers'
 import { createPinia } from 'pinia'
 import { useUserStore } from './user-store'
 import { useCartStore } from './cart-store'
+import { useFavoritesStore } from './favorites-store'
 
 /*
  * When adding new properties to stores, you should also
@@ -33,4 +34,4 @@ export default defineStore((/* { ssrContext } */) => {
   return pinia
 })
 
-export { useUserStore, useCartStore }
+export { useUserStore, useCartStore, useFavoritesStore }

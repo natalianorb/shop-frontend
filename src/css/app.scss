@@ -2,3 +2,10 @@
 * {
   font-family: 'Mulish', sans-serif;
 }
+
+.container {
+  @media (min-width: $breakpoint-md) {
+    max-width: $breakpoint-md;
+    margin: 0 auto;
+  }
+}
