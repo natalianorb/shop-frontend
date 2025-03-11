@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="bg-white text-black">
       <q-toolbar class="justify-between">
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <!-- <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" /> -->
 
         <div class="full-width q-pa-xs">
           <div class="text-uppercase text-body2">Доставить по адресу</div>
@@ -47,7 +47,7 @@ const userStore = useUserStore()
 const { address } = storeToRefs(userStore)
 const cartStore = useCartStore()
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
+// function toggleLeftDrawer() {
+//   leftDrawerOpen.value = !leftDrawerOpen.value
+// }
 </script>
