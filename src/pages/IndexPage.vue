@@ -1,11 +1,7 @@
 <template>
   <q-page class="q-pa-md">
-    <CategoryList
-      :categories="categories"
-      :selected-id="selectedCategory"
-      @select="selectCategory"
-      @show-filter="showFilterDialog = true"
-    />
+    <CategoryList :categories="categories" :selected-ids="selectedCategories" @select="toggleCategory"
+      @show-filter="showFilterDialog = true" />
 
     <ProductGrid :products="filteredProducts" @add-to-cart="addToCart" />
 
@@ -17,31 +13,20 @@
 
         <q-card-section class="q-pt-none">
           <q-list>
-            <q-item
-              v-for="category in categories"
-              :key="category.id"
-              clickable
-              v-ripple
-              @click="selectCategoryAndCloseDialog(category.id)"
-            >
+            <q-item v-for="category in categories" :key="category.id" clickable v-ripple
+              @click="selectCategoryAndCloseDialog(category.id)">
               <q-item-section>
                 <q-item-label>{{ category.name }}</q-item-label>
               </q-item-section>
               <q-item-section avatar>
-                <q-icon v-if="selectedCategory === category.id" name="check" color="primary" />
+                <q-icon v-if="selectedCategories.includes(category.id)" name="check" color="primary" />
               </q-item-section>
             </q-item>
           </q-list>
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn
-            v-if="selectedCategory !== null"
-            flat
-            label="Очистить"
-            color="primary"
-            @click="clearFilter"
-          />
+          <q-btn v-if="selectedCategories !== null" flat label="Очистить" color="primary" @click="clearFilter" />
           <q-btn flat label="Закрыть" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
@@ -60,24 +45,28 @@ import ProductGrid from 'src/components/products/ProductGrid.vue'
 
 const cartStore = useCartStore()
 const showFilterDialog = ref(false)
-const selectedCategory = ref<number | null>(null)
+const selectedCategories = ref<number[]>([])
 
 const filteredProducts = computed(() => {
-  if (!selectedCategory.value) return products
-  return products.filter((product: Product) => product.categoryId === selectedCategory.value)
+  if (!selectedCategories.value.length) return products
+  return products.filter((product: Product) => selectedCategories.value.includes(product.categoryId))
 })
 
-const selectCategory = (categoryId: number) => {
-  selectedCategory.value = selectedCategory.value === categoryId ? null : categoryId
+const toggleCategory = (categoryId: number) => {
+  if (selectedCategories.value.includes(categoryId)) {
+    selectedCategories.value = selectedCategories.value.filter((id) => id !== categoryId)
+  } else {
+    selectedCategories.value.push(categoryId)
+  }
 }
 
 const selectCategoryAndCloseDialog = (categoryId: number) => {
-  selectCategory(categoryId)
+  toggleCategory(categoryId)
   showFilterDialog.value = false
 }
 
 const clearFilter = () => {
-  selectedCategory.value = null
+  selectedCategories.value = []
   showFilterDialog.value = false
 }
 
